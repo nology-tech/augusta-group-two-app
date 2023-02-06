@@ -25,7 +25,7 @@ jobs:
         mongodb-replica-set: test-rs
         mongodb-port: 42069
         
-    - name: change directory
+    - name: change direcory
       run: echo $PWD
       
     - name: Change directory to db
