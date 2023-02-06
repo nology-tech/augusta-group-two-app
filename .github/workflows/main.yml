@@ -1,0 +1,43 @@
+name: Run tests
+
+on:
+  push:
+    branches:
+      - '!main'
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16.0
+
+    - name: Start MongoDB
+      uses: supercharge/mongodb-github-action@1.8.0
+      with:
+        mongodb-version: 6.0 
+        mongodb-replica-set: test-rs
+        mongodb-port: 42069
+        
+    - name: change directory
+      run: echo $PWD
+     
+    - name: Change directory to db
+      run: cd db 
+      
+    - name: change directory
+      run: echo $PWD 
+     
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests
+      run: npm test
+      env:
+        CI: true
