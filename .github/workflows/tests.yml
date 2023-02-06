@@ -23,7 +23,7 @@ jobs:
         mongodb-port: 42069
         
     - name: change directory
-      run: cd db
+      run: echo $PWD
       
     - name: Install dependencies
       run: npm install
