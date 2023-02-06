@@ -3,7 +3,7 @@
 ## Contributors
 
 - [Adam]()
-- [Airidas]()
+- [Airidas](https://github.com/Adaz99)
 - [Mehdi]()
 - [Risper]()
 - [Theo]()
