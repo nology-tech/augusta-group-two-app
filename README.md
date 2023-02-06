@@ -4,7 +4,7 @@
 
 - [Adam]()
 - [Airidas]()
-- [Mehdi]()
+- [Mehdi](https://github.com/LemonRiz)
 - [Risper]()
 - [Theo]()
 
