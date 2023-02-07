@@ -39,7 +39,7 @@
         dest: /var/www/snake.game/html/
     - name: Copy IP
       shell: sed "s/IP_ADDRESS/$(hostname -I)/" /home/vagrant/env/snake/snake-proxy.conf > /etc/nginx/sites-available/snake.game
-    - name: Changing perm of "/foo/bar.sh", adding "+x"
+    - name: Changing perm of "snake, adding "+x"
       file:
         dest: /home/vagrant/env/snake/script.sh
         mode: '0755'

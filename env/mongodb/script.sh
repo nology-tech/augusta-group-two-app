@@ -18,6 +18,7 @@ sudo apt-get install nodejs -y
 
 echo ------------------ Install npm -----------------
 sudo apt-get install npm -y
+npm install -g npm -y
 
 echo ---------- Install MongoDB ----------
 sudo apt install mongodb-org -y
@@ -41,7 +42,9 @@ echo ---------- Get Host IP ----------
 sudo hostname -I > /home/vagrant/global/hostname.txt
 
 echo ---------- Install Dependencies ------------
+
 cd /home/vagrant/scoreApi
+
 npm install
 
 echo ---------- Start API ------------
