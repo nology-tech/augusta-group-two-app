@@ -38,6 +38,7 @@ Vagrant.configure("2") do |config|
         v.vmx["ethernet0.virtualdev"] = "vmxnet3"
     end
   end
+end
 
   # Provisioning MongoDB VM - Windows
 # Vagrant.configure("2") do |config|

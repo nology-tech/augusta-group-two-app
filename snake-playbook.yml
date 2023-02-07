@@ -1,5 +1,5 @@
 ---
-- name: Install MongoDB and dependencies
+- name: Install Nginx and dependencies
   hosts: all
   become: yes
   become_user: root
@@ -43,6 +43,8 @@
       file:
         dest: /home/vagrant/env/snake/script.sh
         mode: '0755'
+    - name: Format Script - Windows spacing issue
+      shell: sed -i -e 's/\r$//' /home/vagrant/env/snake/script.sh
     - name: Run Script
       script: ./env/snake/script.sh
       become: true
