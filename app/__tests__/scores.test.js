@@ -11,13 +11,6 @@ describe("testing the api", () => {
 	})
 })
 
-
-// test to push
-//test 2
-// test 3
-// test 66555
-
-
 // beforeEach((done) => {
 // 	mongoose.connect('mongodb://127.0.0.1:27017/snake_test', () => {
 // 		const seedDB = async () => {
