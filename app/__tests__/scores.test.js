@@ -12,6 +12,8 @@ describe("testing the api", () => {
 })
 
 
+// test to push
+
 
 // beforeEach((done) => {
 // 	mongoose.connect('mongodb://127.0.0.1:27017/snake_test', () => {
