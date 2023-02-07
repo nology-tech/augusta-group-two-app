@@ -12,11 +12,6 @@ const app = express();
 
 app.use(express.json());
 
-const corsOptions = {
-	origin: '*',
-	optionsSuccessStatus: 200,
-};
-
 app.use(cors());
 
 app.use('/api', routes);

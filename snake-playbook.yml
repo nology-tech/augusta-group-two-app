@@ -1,0 +1,52 @@
+---
+- name: Install MongoDB and dependencies
+  hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: 'apt get update'
+      apt:
+        update_cache: true
+        cache_valid_time: 3600
+        force_apt_get: true
+    - name: Install Nginx
+      apt:
+        name: nginx
+        update_cache: true
+        state: latest
+    - name: Creates directory
+      file:
+        path: /var/www/snake.game/html
+        state: directory
+        owner: vagrant
+        group: vagrant
+        mode: '0755'
+        recurse: true
+    - name: Touch File
+      file:
+        path: /etc/nginx/sites-available/snake.game
+        state: touch
+        mode: '0755'
+    - name: Create Server Block
+      file:
+        src: /etc/nginx/sites-available/snake.game
+        dest: /etc/nginx/sites-enabled/snake.game
+        state: link
+    - name: Copy Snake Game
+      copy:
+        src: ./snake/
+        dest: /var/www/snake.game/html/
+    - name: Copy IP
+      shell: sed "s/IP_ADDRESS/$(hostname -I)/" /home/vagrant/env/snake/snake-proxy.conf > /etc/nginx/sites-available/snake.game
+    - name: Changing perm of "/foo/bar.sh", adding "+x"
+      file:
+        dest: /home/vagrant/env/snake/script.sh
+        mode: '0755'
+    - name: Run Script
+      script: ./env/snake/script.sh
+      become: true
+    - name: Restart Nginx Service
+      service:
+        name: nginx
+        state: restarted
