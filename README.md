@@ -33,7 +33,7 @@ Ansible is used as the provisioning step for the Packer build i.e Ansible playbo
     }
 ```
 
-- An EC2 instance was launched, following a success Packer build
+- An EC2 instance was launched, following a success Packer build/image
 - In order to confirm proper provisioning by ansible, I ssh into the machine and ran `node --version`, which returned the node version as requested in playbook.yml
 
 ## Next steps
