@@ -18,11 +18,14 @@ echo ---------- Copy Game ----------
 sudo cp -r app/* /var/www/snake.game/html/
 
 echo ---------- Save DB IP Address  ----------
-DB_IP=http://$(sudo cat /home/vagrant/global/hostname.txt)/api/scores
+# DB_IP=http://$(sudo cat /home/vagrant/global/hostname.txt)/api/scores
+export DB_IP="http://192.168.56.20/api/scores"
+
 
 echo ---------- Update the Snake Game server_name to this IP address --------------
 sudo sed "s/IP_ADDRESS/$(hostname -I)/" /home/vagrant/env/snake/snake-proxy.conf > /etc/nginx/sites-available/snake.game
 sudo sed -i "s/IP_ADDRESS/$DB_IP" /var/www/snake.game/html/scripts/Game.js
+
 
 echo ---------- Reload Nginx --------------
 sudo systemctl reload nginx.service
