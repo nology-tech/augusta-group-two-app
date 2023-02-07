@@ -52,16 +52,16 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "global/", "/home/vagrant/global"
   #Provisioning MongoDB VM    
       
-  config.vm.define "mongodb" do |mongodb|
-          mongodb.vm.box = "generic/ubuntu2010"
-          mongodb.vm.network "private_network", ip: "192.168.56.20"
-          mongodb.vm.provider "virtualbox" do |vb|
-              vb.name = "MongoDB"
-              config.vm.synced_folder "env/mongodb", "/home/vagrant/env/mongodb"
-              config.vm.synced_folder "app/db", "/home/vagrant/app/db"
-              end
-              mongodb.vm.provision "shell", path: "env/mongodb/script.sh"
-          end
+  # config.vm.define "mongodb" do |mongodb|
+  #         mongodb.vm.box = "generic/ubuntu2010"
+  #         mongodb.vm.network "private_network", ip: "192.168.56.20"
+  #         mongodb.vm.provider "virtualbox" do |vb|
+  #             vb.name = "MongoDB"
+  #             config.vm.synced_folder "env/mongodb", "/home/vagrant/env/mongodb"
+  #             config.vm.synced_folder "app/db", "/home/vagrant/app/db"
+  #             end
+  #             mongodb.vm.provision "shell", path: "env/mongodb/script.sh"
+  #         end
   
   #Provisioning JS App VM
   

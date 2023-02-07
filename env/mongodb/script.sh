@@ -44,6 +44,7 @@ sudo hostname -I > /home/vagrant/global/hostname.txt
 echo ---------- Install Dependencies ------------
 cd /home/vagrant/db
 pwd
+npm install -g npm
 npm install
 
 echo ---------- Start API ------------
