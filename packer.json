@@ -30,7 +30,7 @@
   "provisioners": [
     {
       "type": "ansible",
-      "playbook_file": "app.yml"
+      "playbook_file": "/home/ubuntu/app.yml"
     },
 
     {
