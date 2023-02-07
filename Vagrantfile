@@ -60,7 +60,6 @@ Vagrant.configure("2") do |config|
 
 
     mongodb.vm.provider "virtualbox" do |v|
-      v.gui = true
       v.name = "mongodb"
     end
 
@@ -80,7 +79,7 @@ Vagrant.configure("2") do |config|
     snake.vm.network "private_network", ip: "192.168.56.10"
 
     # snake.vm.box_version = "20221120.20.40.0"
-    snake.vm.box_download_insecure = true
+    # snake.vm.box_download_insecure = true
 
     # snake.vm.hostname = "nology.training"
     # snake.hostsupdater.aliases = {
@@ -88,7 +87,6 @@ Vagrant.configure("2") do |config|
     # }
 
      snake.vm.provider "virtualbox" do |v|
-        v.gui = true
         v.name = "snake"
     end
 
