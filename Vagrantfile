@@ -54,6 +54,7 @@ Vagrant.configure("2") do |config|
   # Provisiing MongoDB - Scores API
   config.vm.define "mongodb" do | mongodb |
     mongodb.vm.box = "generic/ubuntu2010"
+    mongodb.vm.network "private_network", ip: "192.168.56.20"
     mongodb.vm.synced_folder "env/mongodb", "/home/vagrant/env/mongodb"
     mongodb.vm.synced_folder "db/", "/home/vagrant/db"
 
@@ -76,6 +77,7 @@ Vagrant.configure("2") do |config|
     snake.vm.box = "generic/ubuntu2010"
     config.vm.synced_folder "app/", "/home/vagrant/app"
     config.vm.synced_folder "env/snake", "/home/vagrant/env/snake"
+    snake.vm.network "private_network", ip: "192.168.56.10"
 
     # snake.vm.box_version = "20221120.20.40.0"
     snake.vm.box_download_insecure = true
