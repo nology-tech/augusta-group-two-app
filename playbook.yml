@@ -1,5 +1,5 @@
 ---
-- hosts: node
+- hosts: all
   become: yes
   remote_user: ubuntu
   become_user: root
@@ -14,11 +14,21 @@
       apt:
         upgrade: yes
         cache_valid_time: 3600
-    - name: "download node"
-      shell: |
-        curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - && sudo apt-get install -y nodejs
-    - name: Install software-properties-common
+    - name: "intall software-properties-common"
+      become: yes
       apt:
         name: software-properties-common
         state: present
+    - name: "add nodejs apt key"
+      apt_key:
+        url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+        state: present
+    - name: "download node"
+      apt_repository:
+        repo: deb https://deb.nodesource.com/node_16.x bionic main
         update_cache: yes
+    - name: "install node.js"
+      apt:
+        update_cache: yes
+        name: nodejs
+        state: present

@@ -37,6 +37,14 @@
       "type": "file",
       "source": "env",
       "destination": "/home/ubuntu/env"
+    },
+    {
+      "type": "shell",
+      "script": "./env/scripts/base.sh"
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "playbook.yml"
     }
   ]
 }
