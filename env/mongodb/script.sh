@@ -18,6 +18,7 @@ sudo apt-get install nodejs -y
 
 echo ------------------ Install npm -----------------
 sudo apt-get install npm -y
+npm install -g npm -y
 
 echo ---------- Install MongoDB ----------
 sudo apt install mongodb-org -y
@@ -42,6 +43,8 @@ sudo hostname -I > /home/vagrant/global/hostname.txt
 
 echo ---------- Install Dependencies ------------
 cd /home/vagrant/db
+pwd
+npm install -g npm
 npm install
 
 echo ---------- Start API ------------
