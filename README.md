@@ -4,7 +4,7 @@
 
 #### Setup
 
-To spin up the project locally using the development environment, which mimicks that of the live site, you will need to install ansible on your host mac using the command `brew install ansible`. Once ansible is installed you can uncomment the config inside the Vagrantfile relevant to M Series Macs. Finally run `vagrant up` to build the environment.
+To spin up the project locally using the development environment, which mimics that of the live site, you will need to install ansible on your host mac using the command `brew install ansible`. Once ansible is installed you can uncomment the config inside the Vagrantfile relevant to M Series Macs. Finally run `vagrant up` to build the environment.
 
 #### Score API (Server)
 
