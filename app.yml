@@ -1,0 +1,44 @@
+---
+- hosts: localhost
+  become: yes
+  remote_user: ubuntu
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: "apt-get update"
+      apt:
+        update_cache: true
+        cache_valid_time: 3600
+        force_apt_get: true
+    - name: "apt-get-upgrade"
+      apt:
+        upgrade: yes
+        cache_valid_time: 3600
+    - name: Install Nginx
+      become: yes
+      command: apt install nginx -y
+    - name: Set up Server Block
+      become: yes
+      command: command_warnings=False
+        mkdir -p /var/www/snake.game/html
+        chown -R $USER:$USER /var/www/snake.game/html
+        chmod -R 755 /var/www/snake.game
+        nano /etc/nginx/sites-available/snake.game
+        ln -s /etc/nginx/sites-available/snake.game /etc/nginx/sites-enabled/
+        nginx -t
+    - name: Copy Game
+      become: yes
+      command: cp -r /home/ubuntu/app/ /var/www/snake.game/html/
+    - name: Save DB IP Address
+      become: yes
+      command: export DB_IP="http://192.168.56.20/api/scores"
+      environment:
+        DB_IP: "http://192.168.56.20/api/scores"
+    - name: Update Snake Game server_name to IP address
+      become: yes
+      command:
+        sed "s/IP_ADDRESS/$(hostname -I)/" /home/ubuntu/env/snake/snake-proxy.conf > /etc/nginx/sites-available/snake.game
+        sed -i "s/IP_ADDRESS/$DB_IP" /var/www/snake.game/html/scripts/Game.js
+    - name: Reload Nginx
+      become: yes
+      command: systemctl reload nginx.service
