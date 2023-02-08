@@ -1,44 +1,54 @@
 ---
-- hosts: localhost
+- name: Install Nginx and dependencies
+  hosts: all
   become: yes
-  remote_user: ubuntu
   become_user: root
   become_method: sudo
   tasks:
-    - name: "apt-get update"
+    - name: "apt get update"
       apt:
         update_cache: true
         cache_valid_time: 3600
         force_apt_get: true
-    - name: "apt-get-upgrade"
-      apt:
-        upgrade: yes
-        cache_valid_time: 3600
     - name: Install Nginx
-      become: yes
-      command: apt install nginx -y
-    - name: Set up Server Block
-      become: yes
-      command: command_warnings=False
-        mkdir -p /var/www/snake.game/html
-        chown -R $USER:$USER /var/www/snake.game/html
-        chmod -R 755 /var/www/snake.game
-        nano /etc/nginx/sites-available/snake.game
-        ln -s /etc/nginx/sites-available/snake.game /etc/nginx/sites-enabled/
-        nginx -t
-    - name: Copy Game
-      become: yes
-      command: cp -r /home/ubuntu/app/ /var/www/snake.game/html/
-    - name: Save DB IP Address
-      become: yes
-      command: export DB_IP="http://192.168.56.20/api/scores"
-      environment:
-        DB_IP: "http://192.168.56.20/api/scores"
-    - name: Update Snake Game server_name to IP address
-      become: yes
-      command:
-        sed "s/IP_ADDRESS/$(hostname -I)/" /home/ubuntu/env/snake/snake-proxy.conf > /etc/nginx/sites-available/snake.game
-        sed -i "s/IP_ADDRESS/$DB_IP" /var/www/snake.game/html/scripts/Game.js
-    - name: Reload Nginx
-      become: yes
-      command: systemctl reload nginx.service
+      apt:
+        name: nginx
+        update_cache: true
+        state: latest
+    - name: Creates directory
+      file:
+        path: /var/www/snake.game/html
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: "0755"
+        recurse: true
+    - name: Touch File
+      file:
+        path: /etc/nginx/sites-available/snake.game
+        state: touch
+        mode: "0755"
+    - name: Create Server Block
+      file:
+        src: /etc/nginx/sites-available/snake.game
+        dest: /etc/nginx/sites-enabled/snake.game
+        state: link
+    - name: Copy Snake Game
+      copy:
+        src: /home/ubuntu/snake/
+        dest: /var/www/snake.game/html/
+    - name: Copy IP
+      shell: sed "s/IP_ADDRESS/$(hostname -I)/" /home/ubuntu/env/snake/snake-proxy.conf > /etc/nginx/sites-available/snake.game
+    - name: Changing perm of "snake, adding "+x"
+      file:
+        dest: /home/ubuntu/env/snake/script.sh
+        mode: "0755"
+    - name: Format Script - Windows spacing issue
+      shell: sed -i -e 's/\r$//' /home/ubuntu/env/snake/script.sh
+    - name: Run Script
+      script: /home/ubuntu/env/snake/script.sh
+      become: true
+    - name: Restart Nginx Service
+      service:
+        name: nginx
+        state: restarted

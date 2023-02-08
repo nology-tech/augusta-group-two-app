@@ -30,8 +30,8 @@
   "provisioners": [
     {
       "type": "file",
-      "source": "app",
-      "destination": "/home/ubuntu/app"
+      "source": "snake",
+      "destination": "/home/ubuntu/snake"
     },
     {
       "type": "file",
