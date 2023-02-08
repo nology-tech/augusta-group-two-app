@@ -4,7 +4,7 @@ const loseEl = document.getElementById('lose');
 const finalScore = document.getElementById('finalScore');
 const loseMsg = document.getElementById('loseMsg');
 
-const URL = 'https://IP_ADDRESS/api/scores';
+const URL = 'IP_ADDRESS';
 
 export class Game {
 	constructor(width, height, name) {
@@ -56,14 +56,9 @@ export class Game {
 	getScores() {
 		return fetch(`${URL}`)
 			.then((res) => {
-				console.log('res');
-				console.log(res);
-
 				return res.json();
 			})
 			.then((data) => {
-				console.log('data');
-				console.log(data);
 				this.highScores = data.scores;
 				this.buildScoreboard();
 				localStorage.setItem('scores', JSON.stringify(data.scores));
@@ -90,6 +85,9 @@ export class Game {
 					if (i > 4) li.classList.add('scoreBoard__item--hide');
 					scoreBoard.appendChild(li);
 				});
+		} else {
+			const p = document.createElement('p');
+			p.innerHTML = 'No scores, be the first';
 		}
 	}
 
