@@ -1,8 +1,11 @@
 #!/bin/bash
 
 echo ---------- Import GPG Key - MongoDB ----------
-wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
-echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+
+echo ---------- Update the System ----------
+sudo apt-get update -y
  
 echo ---------- Update the System ----------
 sudo apt-get update -y
@@ -45,7 +48,11 @@ echo ---------- Install Dependencies ------------
 
 cd /home/vagrant/scoreApi
 
-npm install
+npm install --no-bin-links
+
+echo --------- Setting Environment Variables -------
+export DB_URI="mongodb://127.0.0.1:27017/snake"
+echo $DB_URI
 
 echo ---------- Start API ------------
-# node server.js
+node server.js

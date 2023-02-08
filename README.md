@@ -14,15 +14,10 @@ The first machine that is provisioned is for an Node / Express API. This uses Mo
 
 The second machine that is provisioned is for a vanilla HTML, CSS, and JS implementation of the Snake game. Ansible is used to configure nginx and copies any configuration that is required. For instance, updating the Game.js file to the correct IP for our API and setting up nginx.
 
-## Setting up MongoDB
-
-I first had to have vagrant installed on my Windows computer to allow me to automate provision of virtual machines, as well as Oracle Virtualbox to use as a GUI. Vagrant uses a vagrantfile (written in Ruby) with instructions for creating and destroying new vagrant machines. Provisioning the machines with a vagrantfile allows for automatic installation of software, configuration changes, and modification of options during the 'vagrant up' process.
-I followed [this tutorial](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/) in order to install MongoDB. I set up a vagrantfile that would run a script.sh to update the system, set up the IP address, and download the necessary data and packages - Python, node, npm, and mongoDB. The script also copies the mongod.conf into the Ubuntu VM which is used to direct traffic to the given port.
-The script ends by starting the database API and running the server.js. The machine is now accessible via SSH.
 
 ## Running Snake App
 
-The Vagrantfile also is set up to provision a second machine called 'snake' which can run the Snake game. It assigns a static IP for locally accessing the app. Nginx acts as a webserver. When you run the 'vagrant up' command the snake machine will download and install all necessary packages using the snake/script.sh, as well as copy the snake.conf details into the nginx/sites-available directory to allow for access.
+The Vagrantfile also is set up to provision a second machine called 'snake' which can run the Snake game. It assigns a static IP for locally accessing the app. Nginx acts as a webserver. When you run the `vagrant up` command the snake machine will download and install all necessary packages using the snake/script.sh, as well as copy the snake.conf details into the nginx/sites-available directory to allow for access.
 
 The IP is set to "192.168.56.10" in the vagrantfile, and if you access this IP in your Windows browser, the game snake is accessible. This IP could also be checked if you SSH into the snake machine and use the 'hostname -I' command.
 
