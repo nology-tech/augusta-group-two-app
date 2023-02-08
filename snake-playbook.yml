@@ -39,14 +39,14 @@
         dest: /var/www/snake.game/html/
     - name: Copy IP
       shell: sed "s/IP_ADDRESS/$(hostname -I)/" /home/vagrant/env/snake/snake-proxy.conf > /etc/nginx/sites-available/snake.game
-    - name: Changing perm of "snake, adding "+x"
+    - name: Changing perm of "snake, adding "0755"
       file:
-        dest: /home/vagrant/env/snake/script.sh
+        dest: /home/vagrant/env/snake/endpoint-script.sh
         mode: '0755'
     - name: Format Script - Windows spacing issue
-      shell: sed -i -e 's/\r$//' /home/vagrant/env/snake/script.sh
+      shell: sed -i -e 's/\r$//' /home/vagrant/env/snake/endpoint-script.sh
     - name: Run Script
-      script: ./env/snake/script.sh
+      script: ./env/snake/endpoint-script.sh
       become: true
     - name: Restart Nginx Service
       service:

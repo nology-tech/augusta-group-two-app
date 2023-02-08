@@ -1,19 +1,5 @@
 # Augusta Group Two App
 
-## Contributors
-
-- [Adam](https://github.com/adampaulsackfield)
-
-- [Mehdi](https://github.com/LemonRiz)
-
-- [Airidas](https://github.com/Adaz99)
-
-- [Risper](https://github.com/djava387)
-
-- [Theo]()
-
-- Coach : [Charlie](https://github.com/Charlie-robin)
-
 ### Development Environment - Vagrant (M Series Mac)
 
 #### Setup
@@ -51,3 +37,17 @@ Added a GitHub webhook with the Jenkins url that was triggered when a push reque
 ## Where in the config do you need to go to update the branch?
 
 To access the Jenkins config you would login to Jenkins via (http://3.140.188.113:8080/) find augusta-group-two-CI and click configure. Under source code management (branches to build) you would specify what branch you want it to merge to currently set to 19-ci-pipeline
+
+## Contributors
+
+- [Adam](https://github.com/adampaulsackfield)
+
+- [Mehdi](https://github.com/LemonRiz)
+
+- [Airidas](https://github.com/Adaz99)
+
+- [Risper](https://github.com/djava387)
+
+- [Theo](https://github.com/theo-Ross/)
+
+- Coach : [Charlie](https://github.com/Charlie-robin)
