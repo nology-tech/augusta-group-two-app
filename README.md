@@ -14,7 +14,6 @@ The first machine that is provisioned is for an Node / Express API. This uses Mo
 
 The second machine that is provisioned is for a vanilla HTML, CSS, and JS implementation of the Snake game. Ansible is used to configure nginx and copies any configuration that is required. For instance, updating the Game.js file to the correct IP for our API and setting up nginx.
 
-
 ## Setting up MongoDB
 
 I first had to have vagrant installed on my Windows computer to allow me to automate provision of virtual machines, as well as Oracle Virtualbox to use as a GUI. Vagrant uses a vagrantfile (written in Ruby) with instructions for creating and destroying new vagrant machines. Provisioning the machines with a vagrantfile allows for automatic installation of software, configuration changes, and modification of options during the 'vagrant up' process.
@@ -33,7 +32,7 @@ The IP is set to "192.168.56.10" in the vagrantfile, and if you access this IP i
 
 ## How have you use Jenkins to add Continuous integration with this project?
 
-I have built a test environment in Jenkins that will run the tests and catch any errors with the code and if everything is fine it will be pushed to 
+I have built a test environment in Jenkins that will run the tests and catch any errors with the code and if everything is fine it will be pushed to
 the branch that is specified in the Jenkins configuration.
 
 ## How did you allow Jenkins access to the Github repo?
@@ -50,9 +49,33 @@ Added a GitHub webhook with the Jenkins url that was triggered when a push reque
 
 To access the Jenkins config you would login to Jenkins via (http://3.140.188.113:8080/) find augusta-group-two-CI and click configure. Under source code management (branches to build) you would specify what branch you want it to merge to currently set to 19-ci-pipeline
 
+### Automating Snake Game Deployment using Ansible Playbook and Packer
 
------------------------------------------------------------------------------------------------------------
+The Packer AMI step involves using Packer to create Amazon Machine Images (AMI's) of the App machine. Ansible is needed as the provisioning step for Packer build.
 
+#### packer.json
+
+Specifies the AWS access key and secret key as variables. The builder section specifies the type of builder to use (in this case, Amazon Elastic Block Store (EBS)), the AWS region, the source AMI to use, the instance type, the SSH username, and the name of the AMI to create.
+
+The provisioner section specifies that Ansible should be used to provision the machine, and the app.yml file contains the Ansible playbook for provisioning
+
+#### app.yml
+
+Contains the Ansible playbook for deploying the Snake Game on a server. The playbook is executed on all hosts and requires root access, which is achieved using the `become` and `become_user` parameters.
+
+#### Tasks
+
+    - updates the server packages
+    -  installs Nginx
+    - creates a directory for the game files
+    -  creates a server block in Nginx
+    - copies the game files to the server
+    -  runs a shell script to update the Nginx configuration file with the server's IP address
+    - formats the shell script, runs it, and restarts the Nginx service.
+
+---
+
+---
 
 ## Contributors
 
