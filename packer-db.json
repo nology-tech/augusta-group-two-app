@@ -15,7 +15,7 @@
       "source_ami_filter": {
         "filters": {
           "virtualization-type": "hvm",
-          "name": "ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*",
+          "name": "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*",
           "block-device-mapping.volume-type": "gp2",
           "root-device-type": "ebs"
         },
@@ -24,19 +24,19 @@
       },
       "instance_type": "t2.micro",
       "ssh_username": "ubuntu",
-      "ami_name": "augusta-baked-image-application-group-two-application{{timestamp}}"
+      "ami_name": "augusta-baked-image-application-group-two-database{{timestamp}}"
     }
   ],
   "provisioners": [
     {
       "type": "file",
-      "source": "snake",
-      "destination": "/home/ubuntu/snake"
+      "source": "env",
+      "destination": "/home/ubuntu/env"
     },
     {
       "type": "file",
-      "source": "env",
-      "destination": "/home/ubuntu/env"
+      "source": "scoreApi",
+      "destination": "/home/ubuntu/scoreApi"
     },
     {
       "type": "shell",
@@ -44,7 +44,11 @@
     },
     {
       "type": "ansible-local",
-      "playbook_file": "app.yml"
+      "playbook_file": "mongodb.yml"
+    },
+    {
+      "type": "shell",
+      "script": "./env/npm.sh"
     }
   ]
 }

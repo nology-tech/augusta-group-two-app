@@ -21,6 +21,8 @@ The Vagrantfile also is set up to provision a second machine called 'snake' whic
 
 The IP is set to "192.168.56.10" in the vagrantfile, and if you access this IP in your Windows browser, the game snake is accessible. This IP could also be checked if you SSH into the snake machine and use the 'hostname -I' command.
 
+---
+
 ### CI-Pipeline With GitHub Using Jenkins
 
 ## CI/CD & Jenkins
@@ -44,7 +46,9 @@ Added a GitHub webhook with the Jenkins url that was triggered when a push reque
 
 To access the Jenkins config you would login to Jenkins via (http://3.140.188.113:8080/) find augusta-group-two-CI and click configure. Under source code management (branches to build) you would specify what branch you want it to merge to currently set to 19-ci-pipeline
 
-### Automating Snake Game Deployment using Ansible Playbook and Packer
+---
+
+## Automating Snake Game Deployment using Ansible Playbook and Packer
 
 The Packer AMI step involves using Packer to create Amazon Machine Images (AMI's) of the App machine. Ansible is needed as the provisioning step for Packer build.
 
@@ -67,6 +71,10 @@ Contains the Ansible playbook for deploying the Snake Game on a server. The play
     - copies the game files to the server
     -  runs a shell script to update the Nginx configuration file with the server's IP address
     - formats the shell script, runs it, and restarts the Nginx service.
+
+### creating AMI for Mongodb and provisioning with Ansible
+
+Created a packer configuration file that copies files from "env" and "scoreApi" to the instance, with a shell script "base.sh", "npm.sh" and executing an Ansible playbook "mongodb.yml".
 
 ---
 
