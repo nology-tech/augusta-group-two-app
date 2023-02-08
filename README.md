@@ -17,7 +17,7 @@ The second machine that is provisioned is for a vanilla HTML, CSS, and JS implem
 
 ## Running Snake App
 
-The Vagrantfile also is set up to provision a second machine called 'snake' which can run the Snake game. It assigns a static IP for locally accessing the app. Nginx acts as a webserver. When you run the 'vagrant up' command the snake machine will download and install all necessary packages using the snake/script.sh, as well as copy the snake.conf details into the nginx/sites-available directory to allow for access.
+The Vagrantfile also is set up to provision a second machine called 'snake' which can run the Snake game. It assigns a static IP for locally accessing the app. Nginx acts as a webserver. When you run the `vagrant up` command the snake machine will download and install all necessary packages using the snake/script.sh, as well as copy the snake.conf details into the nginx/sites-available directory to allow for access.
 
 The IP is set to "192.168.56.10" in the vagrantfile, and if you access this IP in your Windows browser, the game snake is accessible. This IP could also be checked if you SSH into the snake machine and use the 'hostname -I' command.
 
