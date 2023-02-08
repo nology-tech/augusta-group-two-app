@@ -12,3 +12,4 @@ export DEBIAN_FRONTEND="noninteractive"
 echo ">>>>>>>>>>> INSTALLING ANSIBLE"
 sudo apt-get update
 sudo apt-get install -y ansible
+
