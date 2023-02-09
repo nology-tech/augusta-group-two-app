@@ -38,15 +38,15 @@
         src: /home/ubuntu/snake/
         dest: /var/www/snake.game/html/
     - name: Copy IP
-      shell: sed "s/IP_ADDRESS/$(hostname -I)/" /home/ubuntu/env/snake/snake-proxy.conf > /etc/nginx/sites-available/snake.game
+      shell: sed "s/IP_ADDRESS/$(curl -4 icanhazip.com)/" /home/ubuntu/env/snake/snake-proxy.conf > /etc/nginx/sites-available/snake.game
     - name: Changing perm of "snake, adding "+x"
       file:
         dest: /home/ubuntu/env/snake/script.sh
         mode: "0755"
     - name: Format Script - Windows spacing issue
-      shell: sed -i -e 's/\r$//' /home/ubuntu/env/snake/script.sh
+      shell: sed -i -e 's/\r$//' /home/ubuntu/env/snake/endpoint-script.sh
     - name: Run Script
-      script: /home/ubuntu/env/snake/script.sh
+      script: /home/ubuntu/env/snake/endpoint-script.sh
       become: true
     - name: Restart Nginx Service
       service:
