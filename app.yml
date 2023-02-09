@@ -5,7 +5,7 @@
   become_user: root
   become_method: sudo
   tasks:
-    - name: "apt get update"
+    - name: 'apt get update'
       apt:
         update_cache: true
         cache_valid_time: 3600
@@ -21,13 +21,13 @@
         state: directory
         owner: ubuntu
         group: ubuntu
-        mode: "0755"
+        mode: '0755'
         recurse: true
     - name: Touch File
       file:
         path: /etc/nginx/sites-available/snake.game
         state: touch
-        mode: "0755"
+        mode: '0755'
     - name: Create Server Block
       file:
         src: /etc/nginx/sites-available/snake.game
@@ -37,17 +37,6 @@
       copy:
         src: /home/ubuntu/snake/
         dest: /var/www/snake.game/html/
-    - name: Copy IP
-      shell: sed "s/IP_ADDRESS/$(curl -4 icanhazip.com)/" /home/ubuntu/env/snake/snake-proxy.conf > /etc/nginx/sites-available/snake.game
-    - name: Changing perm of "snake, adding "+x"
-      file:
-        dest: /home/ubuntu/env/snake/script.sh
-        mode: "0755"
-    - name: Format Script - Windows spacing issue
-      shell: sed -i -e 's/\r$//' /home/ubuntu/env/snake/endpoint-script.sh
-    - name: Run Script
-      script: /home/ubuntu/env/snake/endpoint-script.sh
-      become: true
     - name: Restart Nginx Service
       service:
         name: nginx
