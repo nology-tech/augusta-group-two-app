@@ -26,6 +26,7 @@
     - name: Add NodeJS V16 Repository
       shell: curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
       become: true
+      warn: false
     - name: Install NodeJS
       apt:
         name: nodejs
